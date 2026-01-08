@@ -1,7 +1,7 @@
 services:
   mongodb:
     image: mongo
-    container_name: mongodb_service
+    container_name: mongodb-service
     restart: always
     ports:
       - "27017:27017"
