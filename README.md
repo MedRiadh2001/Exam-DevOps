@@ -147,13 +147,7 @@ mis à jour avec les derniers tags.
 **Description :**  
 Tous les pods sont en état Running, indiquant un déploiement réussi.
 
-### E. Application 
-![Kubernets pods](captures/kubectl.png)
-
-**Description :**  
-Tous les pods sont en état Running, indiquant un déploiement réussi.
-
-### F. Monitoring Grafana
+### E. Monitoring Grafana
 ![Grafana dashboard](captures/dashboard-grafana.png)
 
 **Description :**  
