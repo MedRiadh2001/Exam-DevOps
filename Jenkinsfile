@@ -18,7 +18,6 @@ pipeline {
         }
 
         stage('Build + Scan SERVER') {
-            when { changeset 'backend/**' }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                     sh '''
@@ -39,7 +38,6 @@ pipeline {
         }
 
         stage('Build + Scan CLIENT') {
-            when { changeset 'frontend/voitures/**' }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DH_USER', passwordVariable: 'DH_PASS')]) {
                     sh '''
@@ -63,7 +61,7 @@ pipeline {
     post {
         always {
             // Nettoyage de la machine comme demandé (Page 3)
-            sh 'docker system prune -af || true'
+            // sh 'docker system prune -af || true'
             // Archivage des rapports Trivy pour les consulter dans Jenkins
             archiveArtifacts artifacts: '*.txt', allowEmptyArchive: true
         }
