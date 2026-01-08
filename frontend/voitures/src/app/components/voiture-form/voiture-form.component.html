@@ -1,0 +1,30 @@
+<div class="container mt-4">
+    <h2>{{ editMode ? 'Modifier' : 'Ajouter' }} une voiture</h2>
+    <form (ngSubmit)="save()">
+      <div class="mb-3">
+        <label class="form-label">Marque</label>
+        <input type="text" class="form-control" [(ngModel)]="voiture.marque" name="marque" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" [(ngModel)]="voiture.description" name="description" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Prix</label>
+        <input type="number" class="form-control" [(ngModel)]="voiture.prix" name="prix" required />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Image</label>
+        <input type="file" class="form-control" (change)="onFileSelected($event)" accept="image/*" />
+      </div>
+      
+      <div class="mb-3">
+        <label class="form-label">Caractéristiques (séparées par des virgules)</label>
+        <input type="text" class="form-control" [(ngModel)]="voiture.caracteristiques" name="caracteristiques" (ngModelChange)="updateCaracteristiques($event)" />
+      </div>
+      <button type="button" class="btn btn-success" (click)="uploadImageAndSave()">
+        {{ editMode ? 'Mettre à jour' : 'Ajouter' }}
+      </button>
+      <a routerLink="/" class="btn btn-secondary ms-2">Annuler</a>
+    </form>
+  </div>

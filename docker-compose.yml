@@ -1,0 +1,43 @@
+services:
+  mongodb:
+    image: mongo
+    container_name: mongodb_container
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+  
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env
+    image: exam-devops-backend
+    container_name: server_exam_devops
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend/uploads:/app/uploads
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/exam
+      - PORT=3000
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend/voitures
+      dockerfile: Dockerfile
+    image: exam-devops-frontend
+    container_name: client_exam_devops
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  mongo-data:

@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  
+    <div class="row">
+      <div class="col-md-4 mb-4" *ngFor="let voiture of voitures">
+        <div class="card h-100">
+          <img [src]="voiture.image" class="card-img-top" alt="Voiture" style="height: 200px; object-fit:contain;">
+          <div class="card-body">
+            <h5 class="card-title">{{ voiture.marque }}</h5>
+            <p class="card-text">{{ voiture.description }}</p>
+            <p class="card-text fw-bold">{{ voiture.prix }} TND</p>
+            <button class="btn btn-info btn-sm" (click)="openModal(voiture)">Voir plus</button>
+            <a routerLink="edit/{{voiture.id}}" class="btn btn-warning btn-sm mx-1">Modifier</a>
+            <button class="btn btn-danger btn-sm" (click)="deleteVoiture(voiture.id)">Supprimer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="modal fade" id="voitureModal" tabindex="-1" aria-labelledby="voitureModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="voitureModalLabel">Détails de la voiture</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" *ngIf="selectedVoiture">
+            <img [src]="selectedVoiture.image" class="img-fluid mb-3" alt="Voiture">
+            <p><strong>Marque:</strong> {{ selectedVoiture.marque }}</p>
+            <p><strong>Description:</strong> {{ selectedVoiture.description }}</p>
+            <p><strong>Prix:</strong> {{ selectedVoiture.prix }} TND</p>
+            <p><strong>Caractéristiques:</strong></p>
+            <ul>
+              <li *ngFor="let c of selectedVoiture.caracteristiques">{{ c }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
